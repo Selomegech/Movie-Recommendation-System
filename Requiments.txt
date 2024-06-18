@@ -1,0 +1,5 @@
+flask
+requests
+phyton 3.10
+pandas
+numpy
