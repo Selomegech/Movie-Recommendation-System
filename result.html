@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendations</title>
+    <style>
+        body {
+            background-color: #0e0e0e; /* Dark background */
+            color: #eee; /* Light text color */
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff; /* White heading */
+            font-family: Helvetica;
+        }
+
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .movie-card {
+            width: 200px; /* Adjust width as needed */
+            background-color: #2d2b2b; /* Darker card background */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(105, 104, 104, 0.2); /* Subtle shadow */
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            cursor: pointer;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px); /* Lift on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
+        }
+
+        .poster {
+            width: 100%;
+            height: auto;
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px;
+        }
+
+        .movie-card p {
+            margin: 5px 0; /* Adjust spacing between text */
+        }
+        .movie-details {
+            display: none; /* Hide details initially */
+            position: absolute;
+            top: 100%; /* Position below the card */
+            left: 0;
+            width: 100%;
+            background-color: #333; /* Darker card background */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            padding: 15px;
+            z-index: 1; /* Ensure details appear above other elements */
+        }
+        .movie-card:hover .movie-details {
+            display: block; /* Show details on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Recommendations</h1>
+    
+    <div class="movie-container">
+        {% for item in recommendations %}
+            <div class="movie-card">
+                {% if item.poster_path %}
+                    <img src="https://image.tmdb.org/t/p/w154{{ item.poster_path }}" alt="{{ item.title }} Poster" class="poster">
+                {% else %}
+                    <p>Poster not available</p>
+                {% endif %}
+                <h3>{{ item.title }}</h3>
+                <div class="movie-details"> 
+                    <p>Movie ID: {{ item.movieId }}</p>
+                    <p>Genres: {{ item.genres }}</p>
+                    <p>Predicted Rating: {{ item.predicted_rating }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
